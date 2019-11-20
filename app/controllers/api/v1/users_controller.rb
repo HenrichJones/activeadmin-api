@@ -1,7 +1,12 @@
-class Api::V1::UsersController < ActionController::API
+class Api::V1::UsersController < ApplicationController
 
   def index
-    render json: [], status: 200
+    command = UserListFinder.call(params)
+
+    if command.success?
+      @users = command.result
+      jsonapi_response(@users)
+    end
   end
 
 end
