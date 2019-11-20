@@ -6,7 +6,10 @@ class UserListFinder
     end
 
     def call
-      User.where('username ilike :username', username: "%#{@params[:q]}%")
+      User.where(
+        'username ilike :username', 
+        username: "%#{@params[:q]}%"
+      )
     end
 
 end
