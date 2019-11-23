@@ -11,5 +11,5 @@ class User < ApplicationRecord
             format: { with: URI::MailTo::EMAIL_REGEXP },
             uniqueness: { case_sensitive: false }
 
-  belongs_to :address
+  belongs_to :address, optional: true
 end
