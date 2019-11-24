@@ -3,5 +3,5 @@ class SerializableUser < JSONAPI::Serializable::Resource
 
   attributes :username, :email, :created_at, :updated_at
 
-  belongs_to :address
+  has_many :address
 end

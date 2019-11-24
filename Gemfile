@@ -21,7 +21,7 @@ gem 'jsonapi-rails'
 gem 'simple_command'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
-
+gem 'annotate'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
