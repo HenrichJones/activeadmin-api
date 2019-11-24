@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   deserializable_resource :user, only: %i[create update]
-  before_action :set_user, only: %i(show)
+  before_action :set_user, only: %i(show update)
 
   def index
     command = UserListFinder.call(params)
@@ -13,6 +13,10 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def show
+    jsonapi_response(@user, :ok)
+  end
+
   def create
     @user = User.create(user_params)
 
@@ -23,8 +27,12 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  def show
-    jsonapi_response(@user, :ok)
+  def update
+    if @user.update(user_params)
+      jsonapi_response(@user)
+    else
+      render jsonapi_errors: @user.errors, status: :unprocessable_entity
+    end
   end
 
   private
