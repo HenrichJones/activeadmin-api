@@ -5,12 +5,21 @@ describe Api::V1::UsersController, type: :request do
   let(:json)  { JSON.parse(response.body) }
 
   describe 'POST /api/v1/users' do
+    let(:user) { create(:user) }
     let(:user_attributes) { attributes_for(:user) }
     let(:url) { '/api/v1/users' }
     let(:valid_attributes) {
       { data: { 
           type: 'users',
           attributes: user_attributes 
+        }
+      }
+    }
+
+    let(:invalid_attributes) {
+      { data: {
+          type: 'users',
+          attributes: {}
         }
       }
     }
@@ -31,8 +40,16 @@ describe Api::V1::UsersController, type: :request do
 
     context 'when the request isnt valid' do
       
-      context 'when no data has ben sent' do
-        before { post url, params: {}, headers: header}
+      context 'when parameters are invalid' do
+        before { post url, params: invalid_attributes.to_json, headers: header }
+        
+        it 'should return 422' do
+          expect(response).to have_http_status(422)
+        end
+
+        it 'should return an error message' do
+          expect(json['errors']).to_not be_empty
+        end
 
       end
     end
