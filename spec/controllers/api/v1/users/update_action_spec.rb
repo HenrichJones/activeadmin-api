@@ -4,7 +4,7 @@ describe Api::V1::UsersController, type: :request do
   let(:header) { { 'Accept': 'application/vnd.api+json', 'Content-type': 'application/vnd.api+json' } }
   let(:json)  { JSON.parse(response.body) }
 
-  describe 'PUT /api/v1/users/' do
+  describe 'PUT /api/v1/users/:id' do
     let(:user) { create(:user) }
     let(:url) { "/api/v1/users/#{user.id}"}
     let(:valid_attributes) {

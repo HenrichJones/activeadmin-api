@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   deserializable_resource :user, only: %i[create update]
-  before_action :set_user, only: %i(show update)
+  before_action :set_user, only: %i[show update destroy]
 
   def index
     command = UserListFinder.call(params)
@@ -33,6 +33,11 @@ class Api::V1::UsersController < ApplicationController
     else
       render jsonapi_errors: @user.errors, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @user.destroy
+    render :head, status: :no_content
   end
 
   private
