@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  deserializable_resource :user, only:  %i[create] 
+  deserializable_resource :user, only: %i[create] 
 
   def index
     command = UserListFinder.call(params)
@@ -18,7 +18,7 @@ class Api::V1::UsersController < ApplicationController
     if @user.persisted?
       jsonapi_response(@user)
     else
-       render jsonapi_errors: @user.errors
+       render jsonapi_errors: @user.errors, status: :unprocessable_entity
     end
   end
 
