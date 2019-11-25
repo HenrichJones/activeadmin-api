@@ -23,14 +23,14 @@ describe Api::V1::UsersController, type: :request do
     end
 
     context 'when the request isnt valid' do
-      # before { delete '/api/v1/users/59', headers: header }
+      before { delete '/api/v1/users/59', headers: header }
 
       it 'should return 404' do
-        # expect(response).to have_http_status(404)
+        expect(response).to have_http_status(404)
       end
 
       it 'should return an error message' do
-        # expect(json['errors']).to_not be_empty
+        expect(json['errors']).to_not be_empty
       end
 
     end
