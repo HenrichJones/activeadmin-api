@@ -1,13 +1,13 @@
 class Address < ApplicationRecord
 
   validates :street,
-            presence: true,
+            presence: true
 
   validates :neigborhood,
             presence: true
 
   validates :city,
-            :presence
+            presence: true
 
   validates :state,
             presence: true

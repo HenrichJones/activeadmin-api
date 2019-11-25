@@ -21,7 +21,9 @@ class Api::V1::AddressesController < ApplicationController
         :city,
         :state,
         :zipcode
-      ).merge(user_id: params[:user_id])
+      ).merge(
+        user_id: params[:user_id]
+      )
   end
 
 end
