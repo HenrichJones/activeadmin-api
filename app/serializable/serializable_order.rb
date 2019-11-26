@@ -8,4 +8,10 @@ class SerializableOrder < JSONAPI::Serializable::Resource
       @object.books
     end
   end
+
+  belongs_to :user do
+    meta do
+      @object.user
+    end
+  end
 end
