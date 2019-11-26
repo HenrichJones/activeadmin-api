@@ -5,7 +5,10 @@ FactoryBot.define do
     email { Faker::Internet.email }
     password { '12345678' }
     password_confirmation { '12345678' }
-    address
+    
+    trait :with_addresses do
+      addresses { build_list :address, 3 }
+    end
   end
 
 end

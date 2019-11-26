@@ -1,7 +1,11 @@
 class SerializableUser < JSONAPI::Serializable::Resource
   type 'users'
 
-  attributes :username, :email, :password
+  attributes :username, :email, :created_at, :updated_at
 
-  belongs_to :address
+  has_many :address do
+    meta do
+      @object.addresses
+    end
+  end
 end
