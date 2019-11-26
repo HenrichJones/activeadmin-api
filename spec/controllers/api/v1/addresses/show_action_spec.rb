@@ -21,18 +21,18 @@ describe Api::V1::AddressesController, type: :request do
       end
     end
 
-    # context 'when the request isnt valid' do
-    #   before { get "/api/v1/users/#{user.id}/addresses/notfound", headers: headers }
+    context 'when the request isnt valid' do
+      before { get "/api/v1/users/#{user.id}/addresses/notfound", headers: headers }
 
-    #   it 'should return 404' do
-    #     expect(response).to have_http_status(404)
-    #   end
+      it 'should return 404' do
+        expect(response).to have_http_status(404)
+      end
 
-    #   it 'should return an error message' do
-    #     expect(json['errors']).to_not be_empty
-    #   end
+      it 'should return an error message' do
+        expect(json['errors']).to_not be_empty
+      end
 
-    # end
+    end
 
   end
 end
