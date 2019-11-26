@@ -8,11 +8,11 @@ module Orders
 
     def call
       total = total_books_value(@order_params[:book_ids])
-      Order.create(@order_params.merge total: total)
+      Order.create!(@order_params.merge total: total)
     end
 
     def total_books_value book_ids
-      Book.where(id: book_ids).map(&:price).sum
+      Book.where(id: book_ids).map(&:price).sum if book_ids.any?
     end
 
   end

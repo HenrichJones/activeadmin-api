@@ -7,6 +7,9 @@ class Order < ApplicationRecord
   has_many :books, through: :order_books
   belongs_to :user
 
+  validates :books,
+            presence: true
+
   validates :state,
             presence: true
 
@@ -17,4 +20,5 @@ class Order < ApplicationRecord
     :completed,
     :in_progress
   ]
+
 end

@@ -4,11 +4,7 @@ class Api::V1::OrdersController < ApplicationController
 
   def create
     command = ::Orders::CreateOrderService.call(order_params)
-    if command.success?
-      jsonapi_response(command.result)
-    else
-      render jsonapi_errors: command.errors.full_messages.to_sentence, status: :unprocessable_entity
-    end
+    jsonapi_response(command.result)
   end
 
   def show
