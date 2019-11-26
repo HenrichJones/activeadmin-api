@@ -20,7 +20,7 @@ describe Api::V1::OrdersController, type: :request do
 
     let(:invalid_attributes) {
       { data: {
-          type: 'users',
+          type: 'orders',
           attributes: {}
         }
       }

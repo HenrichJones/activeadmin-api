@@ -4,8 +4,8 @@ FactoryBot.define do
     total { '' }
 
     trait :with_books do
-      addresses { build_list :book, 3 }
+      books { build_list :book, 3 }
     end
-  end
 
+  end
 end
