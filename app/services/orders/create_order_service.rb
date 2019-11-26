@@ -12,7 +12,7 @@ module Orders
     end
 
     def total_books_value book_ids
-      Book.where(id: book_ids).map(&:price).sum if book_ids.any?
+      Book.where(id: book_ids).map(&:price).sum if book_ids.present?
     end
 
   end
