@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users do
         resources :addresses
+        resources :orders
       end
+      resources :books
     end
   end
 end
