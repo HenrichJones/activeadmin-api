@@ -6,9 +6,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users do
         resources :addresses
-        resources :orders
+        resources :orders, only: %i(create)
       end
       resources :books
+      resources :orders, only: %i(index show)
     end
   end
 end

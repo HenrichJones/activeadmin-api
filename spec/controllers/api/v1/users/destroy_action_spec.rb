@@ -23,7 +23,7 @@ describe Api::V1::UsersController, type: :request do
     end
 
     context 'when the request isnt valid' do
-      before { delete '/api/v1/users/59', headers: header }
+      before { delete '/api/v1/users/not_found', headers: header }
 
       it 'should return 404' do
         expect(response).to have_http_status(404)
