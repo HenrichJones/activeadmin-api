@@ -7,7 +7,6 @@ FactoryBot.define do
     featured { true }
     avaiable_on { Date.today }
     image_file_name { '' }
-
   end
 
 end
