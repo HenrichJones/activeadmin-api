@@ -5,11 +5,10 @@ describe Api::V1::OrdersController, type: :request do
   let(:json)  { JSON.parse(response.body) }
 
   describe 'POST /api/v1/:user_id/orders' do
-    let!(:user) { create(:user) }
     let!(:books) { create_list(:book, 3)}
-    let(:order) { create(:order) }
+    let(:order) {  create(:order, :with_books) }
     let(:order_attributes) { attributes_for(:order, { book_ids: [books.first.id, books.last.id]}) }
-    let(:url) { "/api/v1/users/#{user.id}/orders" }
+    let(:url) { "/api/v1/users/#{order.user.id}/orders" }
     let(:valid_attributes) {
       { data: { 
           type: 'orders',
