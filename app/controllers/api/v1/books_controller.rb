@@ -1,6 +1,6 @@
 class Api::V1::BooksController < ApplicationController
   deserializable_resource :book, only: %i[create update]
-  before_action :set_book, only: %i[update destroy]
+  before_action :set_book, only: %i[update destroy show]
 
   def index
     command = BookListFinder.call(params)
@@ -11,6 +11,10 @@ class Api::V1::BooksController < ApplicationController
     else
       render jsonapi_errors: @books.errors.full_messages
     end
+  end
+
+  def show
+    jsonapi_response(@book)
   end
 
   def create
