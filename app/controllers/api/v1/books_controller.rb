@@ -14,7 +14,7 @@ class Api::V1::BooksController < ApplicationController
   end
 
   def show
-    jsonapi_response(@book)
+    jsonapi_response(@book, :ok)
   end
 
   def create
