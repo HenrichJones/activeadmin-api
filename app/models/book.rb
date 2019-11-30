@@ -1,4 +1,5 @@
 class Book < ApplicationRecord
+
   has_many :order_books, class_name: 'OrderBooks'
   has_many :orders, through: :order_books
 
