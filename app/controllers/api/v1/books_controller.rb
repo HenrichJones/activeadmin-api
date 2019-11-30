@@ -1,5 +1,6 @@
 class Api::V1::BooksController < ApplicationController
-  deserializable_resource :book, only: %i[create]
+  deserializable_resource :book, only: %i[create update]
+  before_action :set_book, only: %i[update destroy show]
 
   def index
     command = BookListFinder.call(params)
@@ -12,6 +13,10 @@ class Api::V1::BooksController < ApplicationController
     end
   end
 
+  def show
+    jsonapi_response(@book, :ok)
+  end
+
   def create
     @book = Book.create(book_params)
 
@@ -22,7 +27,24 @@ class Api::V1::BooksController < ApplicationController
     end
   end
 
+  def update
+    if @book.update(book_params)
+      jsonapi_response(@book)
+    else
+      render jsonapi_errors: @book.errors, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @book.destroy
+    return :head, status: :no_content
+  end
+
   private
+
+  def set_book
+    @book = Book.find(params[:id])
+  end
 
   def book_params
     params.require(:book)
