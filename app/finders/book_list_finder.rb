@@ -18,19 +18,16 @@ class BookListFinder
     end
 
     def define_search_type result, key_value
-      binding.pry
       if key_value.first.include?("scope")
         result = search_by_scope(result, key_value.last)
       else
         result = search_by_attribute(result, key_value)
       end
-      binding.pry
       result
     end
 
     def search_by_scope result, value
       if result.any?
-        binding.pry
         book_ids = result.flatten.map(&:id)
 
         case value
@@ -40,7 +37,6 @@ class BookListFinder
           result = [ Book.where(id: book_ids, featured: true) ]
         end
       else
-        binding.pry
         case value
         when "avaiable", "all"
          [ Book.all ]
@@ -52,7 +48,6 @@ class BookListFinder
 
     def search_by_attribute result, key_value
       if result.any?
-        binding.pry
         book_ids = result.flatten.map(&:id)
         result  = [
           Book.where(
@@ -62,7 +57,6 @@ class BookListFinder
           )
         ]
       else
-        binding.pry
         result.push([
           Book.where(
             "#{define_key(key_value)} ilike ?", query_type(key_value.first, key_value.last)
