@@ -9,27 +9,67 @@ class BookListFinder
       @result = []
       if @key_values.any?
         @key_values.each do |k_v|
-          if @result.any?
-            book_ids = @result.flatten.map(&:id)
-            @result  = [
-              Book.where(
-                id: book_ids
-              ).where(
-                "#{define_key(k_v)} ilike ?", query_type(k_v.first, k_v.last)
-              )
-            ]
-          else
-            @result.push([
-              Book.where(
-                "#{define_key(k_v)} ilike ?", query_type(k_v.first, k_v.last)
-              )
-            ])
-          end
+          @result = define_search_type(@result, k_v)
         end
         @result.flatten
       else
         Book.all
       end
+    end
+
+    def define_search_type result, key_value
+      binding.pry
+      if key_value.first.include?("scope")
+        result = search_by_scope(result, key_value.last)
+      else
+        result = search_by_attribute(result, key_value)
+      end
+      binding.pry
+      result
+    end
+
+    def search_by_scope result, value
+      if result.any?
+        binding.pry
+        book_ids = result.flatten.map(&:id)
+
+        case value
+        when "avaiable", "all"
+          result = [ Book.where(id: book_ids) ]
+        when "featured"
+          result = [ Book.where(id: book_ids, featured: true) ]
+        end
+      else
+        binding.pry
+        case value
+        when "avaiable", "all"
+         [ Book.all ]
+        when "featured"
+          [ Book.where(featured: true) ]
+        end
+      end
+    end
+
+    def search_by_attribute result, key_value
+      if result.any?
+        binding.pry
+        book_ids = result.flatten.map(&:id)
+        result  = [
+          Book.where(
+            id: book_ids
+          ).where(
+            "#{define_key(key_value)} ilike ?", query_type(key_value.first, key_value.last)
+          )
+        ]
+      else
+        binding.pry
+        result.push([
+          Book.where(
+            "#{define_key(key_value)} ilike ?", query_type(key_value.first, key_value.last)
+          )
+        ])
+      end
+      result
     end
 
     def define_parameters params
