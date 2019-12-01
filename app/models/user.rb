@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :validatable
+  
+  scope :order_by_created_at, -> { order('created_at DESC') }
 
   validates :username,
             presence:  true
