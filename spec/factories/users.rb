@@ -7,7 +7,7 @@ FactoryBot.define do
     password_confirmation { '12345678' }
     
     trait :with_addresses do
-      addresses { build_list :address, 3 }
+      addresses { create_list :address, 3 }
     end
   end
 
