@@ -5,5 +5,6 @@ FactoryBot.define do
     street      { Faker::Address.street_name }
     state       { Faker::Address.state }
     city        { Faker::Address.city_suffix }
+    user
   end
 end
