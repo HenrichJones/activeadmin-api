@@ -13,9 +13,9 @@ User.create(username: 'Lysa Harley', email: 'lysaharley@gmail.com', password: '1
 puts "#{User.all.count} usuários criados"
 
 puts "Criando Endereços"
-Address.create(street: 'Denmark Loan', neigborhood: 'Wharf Grove', city: 'olympia', state: 'washington', zipcode: '57642355', user_id: 1)
-Address.create(street: 'Coopers East', neigborhood: 'Miterdale', city: 'Fox Hill Drive', state: 'Foxborough', zipcode: '57642355', user_id: 2)
-Address.create(street: 'New Park Cloisters', neigborhood: 'Ackhurst Lodge', city: 'Cloisters', state: 'Lodge Drive', zipcode: '57642355', user_id: 3)
+Address.create(street: 'Denmark Loan', neigborhood: 'Wharf Grove', city: 'olympia', state: 'washington', zipcode: '57642355', user_id: User.all.first)
+Address.create(street: 'Coopers East', neigborhood: 'Miterdale', city: 'Fox Hill Drive', state: 'Foxborough', zipcode: '57642355', user_id: User.all.last)
+Address.create(street: 'New Park Cloisters', neigborhood: 'Ackhurst Lodge', city: 'Cloisters', state: 'Lodge Drive', zipcode: '57642355', user_id: User.all.first)
 puts "#{Address.all.count} endereços criados"
 
 puts "Criando Livros"
@@ -26,7 +26,7 @@ Book.create(title: 'Descomplicando o Docker 2a edição', description: 'Dont pan
 puts "#{Book.all.count} livros criados"
 
 puts "Criando Pedidos"
-Order.create(user_id: 1, state: 0, book_ids: [1, 2], total: (Book.find(1).price.to_i + Book.find(2).price.to_i))
-Order.create(user_id: 2, state: 1, book_ids: [2, 3], total: (Book.find(2).price.to_i + Book.find(3).price.to_i))
-Order.create(user_id: 3, state: 0, book_ids: [3, 4], total: (Book.find(3).price.to_i + Book.find(4).price.to_i))
+Order.create(user_id: User.all.first, state: 0, book_ids: [Book.all.first.id, Book.all.last.id], total: (Book.all.first.price.to_i + Book.all.last.price.to_i))
+Order.create(user_id: User.all.last, state: 1, book_ids: [Book.all.first.id, Book.all.last.id], total: (Book.all.first.price.to_i + Book.all.last.price.to_i))
+Order.create(user_id: User.all.first, state: 0, book_ids: [Book.all.first.id, Book.all.last.id], total: (Book.all.first.price.to_i + Book.all.last.price.to_i))
 puts "#{Order.all.count} pedidos criados"
