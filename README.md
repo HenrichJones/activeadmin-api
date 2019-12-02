@@ -1,6 +1,4 @@
-# README
-
-Activeadmin - API
+# Activeadmin - API
 
 ## Technologies
 
@@ -16,11 +14,11 @@ Activeadmin - API
 
 **2. Environment Variables**
 
-Create a file named `database.yml` on the config of the project with the following content and replace with your the database info.
+- Create a file named `database.yml` on the config of the project with the following content and replace with your the database info.
 
 **3. Database**
 
-You must add the database variables on .env described above.
+- You must add the database variables on .env described above.
 Create a database directly on **PostgreSQL** (with psql) or use:
 ```
   rails db:create // create a default database following .env
@@ -45,3 +43,6 @@ After create database using rails db:create you can run
 ```
   rails s
 ```
+
+**5. Database Model**
+![](https://i.imgur.com/lLfmONK.png)
