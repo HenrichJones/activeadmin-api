@@ -1,6 +1,6 @@
 class Api::V1::AddressesController < ApplicationController
   deserializable_resource :address, only: %i[create update]
-  before_action :set_address, only: %i(update show)
+  before_action :set_address, only: %i(update show destroy)
 
   def show
     jsonapi_response(@address, :ok)
@@ -22,6 +22,11 @@ class Api::V1::AddressesController < ApplicationController
     else
       render jsonapi_errors: @address.errors, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @address.destroy
+    render :head, status: :no_content
   end
 
   private
