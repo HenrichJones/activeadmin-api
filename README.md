@@ -44,5 +44,9 @@ After create database using rails db:create you can run
   rails s
 ```
 
+**6. API link on heroku**
+
+- [activeadmin-api Herokuapp](https://activeadmin-api.herokuapp.com/api/v1/dashboard)
+
 **5. Database Model**
 ![](https://i.imgur.com/lLfmONK.png)
